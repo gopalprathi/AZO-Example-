@@ -8,14 +8,16 @@ export default class Header extends Component {
         this.state = {
             userName: '',
             password: '',
-            isLoggedIn: sessionStorage.getItem('isLoggedIn')? sessionStorage.getItem('isLoggedIn'):false
+            isLoggedIn: sessionStorage.getItem('isLoggedIn')==='true'? true:false
         }
     }
 
     componentDidMount(){
         //Show Home page If Login session active
-        if(sessionStorage.getItem('isLoggedIn')){
+        if(sessionStorage.getItem('isLoggedIn')==='true'){
             document.getElementById('homeContainer').style.display = 'block';
+        }else{
+            document.getElementById('homeContainer').style.display = 'none'; 
         }
     }
 
@@ -63,11 +65,11 @@ export default class Header extends Component {
         }else{
             return(  
                 <header id="HeaderContainer" className="row p-4">
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <p>AutoZone Logo</p>
                         <Search />
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-7">
                         <div className="float-right">
                             <h5>My Store</h5>
                             <p>SUMMER AVE</p>
