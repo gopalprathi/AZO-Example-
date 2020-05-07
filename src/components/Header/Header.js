@@ -1,0 +1,84 @@
+import React, { Component } from 'react'
+import Login from '../Login';
+import Search from '../Search/Search'
+import logo from '../../images/az-logo.svg'
+
+export default class Header extends Component {
+    constructor(){
+        super();
+        this.state = {
+            userName: '',
+            password: '',
+            isLoggedIn: sessionStorage.getItem('isLoggedIn')? sessionStorage.getItem('isLoggedIn'):false
+        }
+    }
+
+    componentDidMount(){
+        //Show Home page If Login session active
+        if(sessionStorage.getItem('isLoggedIn')){
+            document.getElementById('homeContainer').style.display = 'block';
+        }
+    }
+
+    handleUsername = (event) =>{
+        this.setState({userName: event.target.value})
+    }
+
+    handlePassword = (event) =>{
+        this.setState({password: event.target.value})
+    }
+
+    handleLogin = (event) => {
+        if(this.state.userName === 'Gopal' && this.state.password === 'pass'){
+            this.setState({isLoggedIn: true})
+            //Uses sessionStorage to mentain Login session
+            sessionStorage.isLoggedIn = true;
+            document.getElementById('loginError').style.display = 'none';
+            document.getElementById('homeContainer').style.display = 'block';
+        }else{
+            document.getElementById('loginError').style.display = 'block';
+            this.setState({isLoggedIn: false, userName: '', password: ''})
+        }
+    }
+
+    handleLogOut = (event) => {
+        this.setState({isLoggedIn: false, userName: '', password: ''})
+        document.getElementById('homeContainer').style.display = 'none';
+        sessionStorage.isLoggedIn = false;
+    }
+    
+    render() {
+        if(!this.state.isLoggedIn){
+        return (
+            <div id="LoginContainer">
+                <Login
+                    isLoggedIn={this.state.isLoggedIn}
+                    userName={this.state.userName}
+                    password={this.state.password}
+                    handleUsername={this.handleUsername}
+                    handlePassword={this.handlePassword}
+                    handleLogin={this.handleLogin}
+                />
+            </div>
+        )
+        }else{
+            return(  
+                <header id="HeaderContainer" className="row p-4">
+                    <div className="col-sm-4">
+                        <img src={logo} alt="logo"/>
+                        <Search />
+                    </div>
+                    <div className="col-sm-6">
+                        <div className="float-right">
+                            <h5>My Store</h5>
+                            <p>4394 SUMMER AVE</p>
+                            <p>MEMPHIS, TN 38122</p>
+                            <p>(901) 761-0514</p>
+                        </div>
+                    </div>
+                    <div className="col-sm-2"><button className="btn btn-danger float-right" onClick={this.handleLogOut}>Log Out</button></div>
+                </header>
+            )
+        }
+    }    
+}
