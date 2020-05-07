@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Login from '../Login';
 import Search from '../Search/Search'
-import logo from '../../images/az-logo.svg'
 
 export default class Header extends Component {
     constructor(){
@@ -65,15 +64,15 @@ export default class Header extends Component {
             return(  
                 <header id="HeaderContainer" className="row p-4">
                     <div className="col-sm-4">
-                        <img src={logo} alt="logo"/>
+                        <p>AutoZone Logo</p>
                         <Search />
                     </div>
                     <div className="col-sm-6">
                         <div className="float-right">
                             <h5>My Store</h5>
-                            <p>4394 SUMMER AVE</p>
-                            <p>MEMPHIS, TN 38122</p>
-                            <p>(901) 761-0514</p>
+                            <p>SUMMER AVE</p>
+                            <p>MEMPHIS, TN 88888</p>
+                            <p>(901) 4444-777</p>
                         </div>
                     </div>
                     <div className="col-sm-2"><button className="btn btn-danger float-right" onClick={this.handleLogOut}>Log Out</button></div>
