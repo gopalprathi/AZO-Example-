@@ -67,7 +67,7 @@ export default class Header extends Component {
                 <header id="HeaderContainer" className="row p-4">
                     <div className="col-sm-3">
                         <p>AutoZone Logo</p>
-                        <Search />
+                        <Search options={this.props.categories} handleSearch={this.props.handleSearch}/>
                     </div>
                     <div className="col-sm-7">
                         <div className="float-right">
@@ -77,7 +77,10 @@ export default class Header extends Component {
                             <p>(901) 4444-777</p>
                         </div>
                     </div>
-                    <div className="col-sm-2"><button className="btn btn-danger float-right" onClick={this.handleLogOut}>Log Out</button></div>
+                    <div className="col-sm-2">
+                        <p className="float-right">Platinum User</p>
+                        <button className="btn btn-danger float-right" onClick={this.handleLogOut}>Log Out</button>
+                    </div>
                 </header>
             )
         }

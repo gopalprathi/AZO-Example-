@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 export default function ProductDetails(props) {
     return (
-        <div>
+        <div className="col-sm-4">
             <img src={props.url} alt={props.productname} />
             <p>{props.productname}</p>
         </div>

@@ -1,53 +1,60 @@
 import React from 'react';
 import ProductCategory from '../ProductCategory/ProductCategory';
+import ProductList from '../ProductList/ProductList';
 import Header from '../Header/Header';
 import './Home.css'
+import Service from '../../Service/Service'
 
 class Home extends React.Component {
     constructor(){
         super();
-        this.state = { ProductCategoryList : [
-                {
-                    'ProductCategoryHeading': 'Batteries',
-                    'ProductCategoryItemList': [
-                            'Battery',
-                            'Specialty Automotive Batery',
-                            'Truck Battery',
-                    ]
-                },
-                {
-                    'ProductCategoryHeading':'Marine',
-                    'ProductCategoryItemList': ['Marine Battery']
-                },
-                {
-                    'ProductCategoryHeading':'Lawn and Garden',
-                    'ProductCategoryItemList': ['Lawn & Garden Battery']
-                },
-                {
-                    'ProductCategoryHeading':'Motorcycle',
-                    'ProductCategoryItemList': ['Power Sport Battery']
-                },
-                {
-                    'ProductCategoryHeading':'Starting and Charging Testing and Specialty Tools',
-                    'ProductCategoryItemList': ['Power Sport Battery']
-                }
-            ],
-        }
+        this.Service = new Service();
+        this.state = {};
+        this.handleSearch = this.handleSearch.bind(this)
+    }
+
+    componentWillMount(){
+        this.Service.getAutoParts().then((autoparts)=>{
+            let ProductList = [];
+            let Categories = [];
+            ProductList = autoparts.data.map((autopart)=>{
+                Categories.push(autopart.category);
+                return {'partname': autopart.partname, 'imgurl': autopart.imgurl, 'key': autopart.key}
+            });
+
+            this.setState({
+                ProductList, Categories: [...new Set(Categories)]
+            });
+        })
+    }
+
+    handleSearch(){
+        const searchField = document.getElementById('searchField');
+        this.Service.getByCategory(searchField.value).then((autoparts)=>{
+            let ProductList = [];
+            ProductList = autoparts.data.map((autopart)=>{
+                return {'partname': autopart.partname, 'imgurl': autopart.imgurl, 'key': autopart.key}
+            });
+
+            this.setState({
+                ProductList
+            });
+        })
     }
 
     render() {
         return (
             <>
-                <Header />
+                <Header categories={this.state.Categories?this.state.Categories:[]} handleSearch={this.handleSearch}/>
                 <div id="homeContainer" style={{display:'none'}}>
                     <div className="row">
                         <div className="col-sm-3">
                             <div className="category-section">
-                                <ProductCategory productCategoryList={this.state.ProductCategoryList}/>
+                                <ProductCategory productCategoryList={this.state.Categories}/>
                             </div>
                         </div>
                         <div className="col-sm-9">
-                            <p>Product list will come here</p>
+                            <ProductList productList={this.state.ProductList} />
                         </div>
                     </div>
                     

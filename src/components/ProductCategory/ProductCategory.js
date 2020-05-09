@@ -4,18 +4,9 @@ import { PropTypes } from 'prop-types';
 export default function ProductCategory({productCategoryList}) {
     return (
         <div>
-            <h2>Category</h2>
+            <h5>Product Categories</h5>
             {
-                productCategoryList.map((item)=>{
-                    return (
-                        <div key={item.ProductCategoryHeading}>
-                            <p>{item.ProductCategoryHeading}</p>
-                            <ul>
-                                {item.ProductCategoryItemList.map(listItem=><li key={listItem}>{listItem}</li>)}
-                            </ul>
-                        </div>
-                    );
-                })
+                productCategoryList?productCategoryList.map((item)=><p key={item}>{item}</p>):null
             }
         </div>
     )
