@@ -1,7 +1,9 @@
 import React from 'react';
+import $ from 'jquery';
 import ProductCategory from '../ProductCategory/ProductCategory';
 import ProductList from '../ProductList/ProductList';
 import Header from '../Header/Header';
+import ProductView from '../ProductView/ProductView';
 import './Home.css'
 import Service from '../../Service/Service'
 
@@ -10,7 +12,8 @@ class Home extends React.Component {
         super();
         this.Service = new Service();
         this.state = {};
-        this.handleSearch = this.handleSearch.bind(this)
+        this.handleSearch = this.handleSearch.bind(this);
+        this.handleProductView = this.handleProductView.bind(this);
     }
 
     componentWillMount(){
@@ -42,6 +45,22 @@ class Home extends React.Component {
         })
     }
 
+    handleProductView(event){
+        const productName = event.target.innerHTML;
+        this.Service.getByPartName(productName).then((autopart)=>{
+            this.setState({
+                ProductViewDetails: autopart.data[0],
+                modalShow: true
+            });
+        });
+    }
+
+    handleModalClose=()=>{
+        this.setState({
+            modalShow: false
+        });
+    }
+
     render() {
         return (
             <>
@@ -54,11 +73,12 @@ class Home extends React.Component {
                             </div>
                         </div>
                         <div className="col-sm-9">
-                            <ProductList productList={this.state.ProductList} />
+                            <ProductList productList={this.state.ProductList} handleProductView={this.handleProductView} />
                         </div>
                     </div>
                     
                 </div>
+                <ProductView data={this.state.ProductViewDetails} handleModalClose={this.handleModalClose} modalShow={this.state.modalShow}/>
             </>
         );
     }

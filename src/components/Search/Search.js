@@ -11,7 +11,7 @@ export default function Search({options,handleSearch}) {
             <input id="searchField" onInput={handleSearch} type="text" className="form-control" placeholder="Search Here" list="searchTermList" />
             <datalist id='searchTermList'>
                 {
-                    options.map((item)=><option value={item} />)
+                    options.map((item)=><option key={item} value={item} />)
                 }
             </datalist>
 

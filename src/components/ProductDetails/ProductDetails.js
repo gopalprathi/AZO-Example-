@@ -5,7 +5,7 @@ export default function ProductDetails(props) {
     return (
         <div className="col-sm-4">
             <img src={props.url} alt={props.productname} />
-            <p>{props.productname}</p>
+            <p data-toggle="modal" data-target="#productViewModal" onClick={props.handleProductView}>{props.productname}</p>
         </div>
     )
 }

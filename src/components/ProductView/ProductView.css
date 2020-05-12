@@ -1,0 +1,8 @@
+.modal.show{
+    display: block;
+}
+
+.centerContent{
+    text-align: center;
+    justify-content: center;
+}
