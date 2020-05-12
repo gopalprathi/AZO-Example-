@@ -1,0 +1,6 @@
+.link{
+    cursor: pointer;
+    color: rgb(204, 48, 48);
+    font-weight: 600;
+    text-decoration: underline;
+}
