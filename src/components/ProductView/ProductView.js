@@ -21,7 +21,7 @@ const ProductView = (props) => {
                         <p>{props.data.description}</p>
                     </div>
                     <div className="modal-footer centerContent">
-                        <button type="button" className="btn btn-primary">Add to Cart</button>
+                        <button type="button" className="btn btn-primary" onClick={()=>props.handleAddToCart(props.data)}>Add to Cart</button>
                     </div>
                     </div>
                 </div>

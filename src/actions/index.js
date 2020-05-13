@@ -1,0 +1,1 @@
+export const  addToCart = (autopart) => ({type:'ADD_TO_CART', payload: autopart });

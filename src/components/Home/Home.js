@@ -1,11 +1,13 @@
 import React from 'react';
-import $ from 'jquery';
 import ProductCategory from '../ProductCategory/ProductCategory';
 import ProductList from '../ProductList/ProductList';
 import Header from '../Header/Header';
 import ProductView from '../ProductView/ProductView';
+import Cart from '../CartScreen/Cart';
 import './Home.css'
-import Service from '../../Service/Service'
+import Service from '../../Service/Service';
+import {connect} from 'react-redux';
+import {addToCart} from '../../actions';
 
 class Home extends React.Component {
     constructor(){
@@ -78,9 +80,19 @@ class Home extends React.Component {
                     </div>
                     
                 </div>
-                <ProductView data={this.state.ProductViewDetails} handleModalClose={this.handleModalClose} modalShow={this.state.modalShow}/>
+                <ProductView 
+                    data={this.state.ProductViewDetails} 
+                    handleModalClose={this.handleModalClose} 
+                    modalShow={this.state.modalShow} 
+                    handleAddToCart={this.props.addToCart}
+                />
+                
+                <Cart />
             </>
         );
     }
 }
-export default Home;
+
+const mapStateToProps = ({cart}) => ({cart});
+export default connect(mapStateToProps, {addToCart})(Home);
+
