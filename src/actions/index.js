@@ -1,1 +1,1 @@
-export const  addToCart = (autopart) => ({type:'ADD_TO_CART', payload: autopart });
+export const  addToCart = (autopart, quantity) => ({type:'ADD_TO_CART', payload: {autopart, quantity}});

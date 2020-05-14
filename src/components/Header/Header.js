@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Login from '../Login';
-import Search from '../Search/Search'
+import Search from '../Search/Search';
+import {Link} from 'react-router-dom';
 
 export default class Header extends Component {
     constructor(){
@@ -79,7 +80,8 @@ export default class Header extends Component {
                     </div>
                     <div className="col-sm-2">
                         <p className="float-right">Platinum User</p>
-                        <button className="btn btn-danger float-right" onClick={this.handleLogOut}>Log Out</button>
+                        <button className="btn btn-danger float-right mb-2" onClick={this.handleLogOut}>Log Out</button>
+                        <Link className="btn btn-danger float-right" to='/cart'>Go to Cart</Link>
                     </div>
                 </header>
             )

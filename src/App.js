@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './components/Home/Home';
+import Cart from './components/CartScreen/Cart'
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 class App extends Component {
   constructor() {
     super();
@@ -10,11 +12,16 @@ class App extends Component {
   }
   render() {
     return (
-      <div>     
-      {this.props.children} 
-      <Home title='This is a the main section' bodyText='Hello World!'>
-      </Home>
-       </div>
+      <Router>
+        <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/cart">
+              <Cart />
+            </Route>
+        </Switch>    
+       </Router>
     );
   }
 }

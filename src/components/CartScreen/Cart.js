@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import ProductDetails from '../ProductDetails/ProductDetails';
 
 function Cart(props) {
     return (
@@ -10,12 +9,18 @@ function Cart(props) {
                 {
                     props.cart?
                     props.cart.map((product)=>{
-                    return <ProductDetails  key={product.key} url={product.imgurl} productname={product.partname} handleProductView={()=>{}} />
+                    return (
+                        <div className="col-md-4" key={product.autopart.key}>
+                            <img src={product.autopart.imgurl} alt={product.autopart.partname} />
+                            <p>{product.autopart.partname}</p>
+                            <p>Qty: <input type="text" value={product.quantity} /> </p>
+                        </div>
+                        )
                     })
                     :null
                 }
-                {props.cart&&props.cart.length?null:<h5>Your Cart is Empty! Please add items</h5>}
             </div>
+            {props.cart&&props.cart.length?<div className="row"><button className="btn btn-primary">Confirm Order</button></div>:<h5>Your Cart is Empty! Please add items</h5>}
         </div>
     )
 }

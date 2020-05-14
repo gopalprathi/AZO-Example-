@@ -3,7 +3,6 @@ import ProductCategory from '../ProductCategory/ProductCategory';
 import ProductList from '../ProductList/ProductList';
 import Header from '../Header/Header';
 import ProductView from '../ProductView/ProductView';
-import Cart from '../CartScreen/Cart';
 import './Home.css'
 import Service from '../../Service/Service';
 import {connect} from 'react-redux';
@@ -86,8 +85,6 @@ class Home extends React.Component {
                     modalShow={this.state.modalShow} 
                     handleAddToCart={this.props.addToCart}
                 />
-                
-                <Cart />
             </>
         );
     }

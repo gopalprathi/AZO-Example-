@@ -21,7 +21,15 @@ const ProductView = (props) => {
                         <p>{props.data.description}</p>
                     </div>
                     <div className="modal-footer centerContent">
-                        <button type="button" className="btn btn-primary" onClick={()=>props.handleAddToCart(props.data)}>Add to Cart</button>
+                        <div className="row">
+                            <label>Enter Quantity: </label>
+                            <input type="number" id="quantityCount" max="10"/>
+                            <button 
+                                type="button" 
+                                className="btn btn-primary ml-4" 
+                                onClick={()=>props.handleAddToCart(props.data, document.getElementById('quantityCount').value)}>
+                                Add to Cart</button>
+                        </div>
                     </div>
                     </div>
                 </div>
