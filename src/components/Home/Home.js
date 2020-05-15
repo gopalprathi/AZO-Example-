@@ -6,7 +6,7 @@ import ProductView from '../ProductView/ProductView';
 import './Home.css'
 import Service from '../../Service/Service';
 import {connect} from 'react-redux';
-import {addToCart} from '../../actions';
+import {addToCart, showModal, closeModal} from '../../actions';
 
 class Home extends React.Component {
     constructor(){
@@ -51,14 +51,8 @@ class Home extends React.Component {
         this.Service.getByPartName(productName).then((autopart)=>{
             this.setState({
                 ProductViewDetails: autopart.data[0],
-                modalShow: true
             });
-        });
-    }
-
-    handleModalClose=()=>{
-        this.setState({
-            modalShow: false
+            this.props.showModal();
         });
     }
 
@@ -81,8 +75,8 @@ class Home extends React.Component {
                 </div>
                 <ProductView 
                     data={this.state.ProductViewDetails} 
-                    handleModalClose={this.handleModalClose} 
-                    modalShow={this.state.modalShow} 
+                    handleModalClose={this.props.closeModal} 
+                    modalShow={this.props.modalShow} 
                     handleAddToCart={this.props.addToCart}
                 />
             </>
@@ -90,6 +84,6 @@ class Home extends React.Component {
     }
 }
 
-const mapStateToProps = ({cart}) => ({cart});
-export default connect(mapStateToProps, {addToCart})(Home);
+const mapStateToProps = ({cart, modalShow}) => ({cart, modalShow});
+export default connect(mapStateToProps, {addToCart, showModal, closeModal})(Home);
 
